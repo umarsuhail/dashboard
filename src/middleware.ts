@@ -3,10 +3,15 @@ import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-
-  if (pathname === '/') {
+  const isLoggedIn = request.cookies.get('session') || sessionStorage.getItem('email');
+  if ( isLoggedIn) {
+    console.log(isLoggedIn,'isLoggedIn');
+    
+    return NextResponse.redirect(new URL('/dashboard', request.url));
+  }else{
     return NextResponse.redirect(new URL('/login', request.url));
   }
+  
 }
 
 export const config = {

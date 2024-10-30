@@ -12,7 +12,7 @@ export default function Layout({ children }: LayoutProps) {
       <Sidebar />
       <div className="flex-1 p-4 text-white overflow-scroll max-h-screen">
         <header className="text-2xl font-bold text-gray-950 mb-4">
-          <h1>Dashboard</h1>
+          <h1>Users</h1>
         <BreadCrumbs></BreadCrumbs>
 
         </header>

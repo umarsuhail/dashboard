@@ -5,3 +5,7 @@ type User = {
     username: string;
     email: string;
 }
+type LoginFormInputs={
+    email:string,
+    password:string
+}
