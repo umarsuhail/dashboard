@@ -5,6 +5,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
+import { User } from "../utils/types";
 const userSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address"),

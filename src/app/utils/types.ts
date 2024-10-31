@@ -1,11 +1,16 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-type User = {
+export type User = {
     id?:string; 
     name: string;
     username: string;
     email: string;
 }
-type LoginFormInputs={
+export type LoginFormInputs={
     email:string,
     password:string
 }
+export interface UserState {
+    users: User[];
+    loading: boolean;
+    error: string | null;
+  }

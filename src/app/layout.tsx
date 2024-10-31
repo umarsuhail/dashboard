@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/NavBar";
-
+import { ReduxProvider } from "./redux/Provider";
 
 const ubuntu = Ubuntu({
   weight: ["400", "500", "700"],
@@ -10,7 +10,6 @@ const ubuntu = Ubuntu({
   variable: "--font-ubuntu",
   subsets: ["latin"],
 });
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,12 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`antialiased dark font-quickSand ${ubuntu.className} `}
-        >
-        <NavBar></NavBar>
-        {children}
-
+      <body className={`antialiased dark font-quickSand ${ubuntu.className} `}>
+        <ReduxProvider>
+          {" "}
+          <NavBar></NavBar>
+          {children}
+        </ReduxProvider>
       </body>
     </html>
   );

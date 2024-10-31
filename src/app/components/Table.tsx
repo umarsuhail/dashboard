@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/table";
+import { User } from "../utils/types";
 
 interface TableProps {
   title: string;
