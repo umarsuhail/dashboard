@@ -3,6 +3,6 @@ export const menuItems = [
   { title: "Users", icon: "flowbite:users-outline", navigateTo: "/users" },
 ];
 export const sampleUser={
-  userName:"admin",
+  userName:"admin@email.com",
   password:"admin@123"
 }

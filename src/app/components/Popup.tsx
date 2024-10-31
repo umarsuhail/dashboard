@@ -15,18 +15,20 @@ type UserFormInputs = z.infer<typeof userSchema>;
 interface PopupProps {
   onFormSubmit: (data: UserFormInputs & { id: string }) => void;
   handleClose: () => void;
+  initialData?: User | null;
 }
-export default function Popup({ onFormSubmit, handleClose }: PopupProps) {
+export default function Popup({initialData, onFormSubmit, handleClose }: PopupProps) {
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<User>({
     resolver: zodResolver(userSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      username: "",
+      name: initialData?.name || "",
+      email: initialData?.email || "",
+      username: initialData?.username || "",
     },
   });
   const [formData, setFormData] = useState<User>({
@@ -38,10 +40,23 @@ export default function Popup({ onFormSubmit, handleClose }: PopupProps) {
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    if (initialData) {
+      reset({
+        name: initialData.name,
+        email: initialData.email,
+        username: initialData.username,
+      });
+    } else {
+      reset({
+        name: "",
+        email: "",
+        username: "",
+      });
+    }
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, []);
+  }, [initialData, reset]);
 
   const onSubmit: SubmitHandler<UserFormInputs> = (data: User) => {
     const userData = { ...data, id: uuidv4() };
@@ -57,7 +72,7 @@ export default function Popup({ onFormSubmit, handleClose }: PopupProps) {
       <div className="bg-secondary_bg md:w-2/4  rounded-lg shadow-lg">
 
         <p className="text-xl font-bold text-primary m-6 flex justify-between">
-          Create new user
+         {initialData?.name?"Update User":"Create new user"} 
             <button onClick={handleClose}><Icon icon="mingcute:close-line" className="text-gray-700 m-2"/></button> 
         </p>
         <form onSubmit={handleSubmit(onSubmit)} className="m-9 flex flex-wrap">

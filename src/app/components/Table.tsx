@@ -1,4 +1,3 @@
-import { Icon } from "@iconify/react/dist/iconify.js";
 import {
   Table,
   TableBody,
@@ -15,6 +14,7 @@ interface TableProps {
   data:User[];
   action: boolean;
   setData: React.Dispatch<React.SetStateAction<User[]>>;
+  renderActions?: (user: User) => JSX.Element;
 }
 
 const TableComponent: React.FC<TableProps> = ({
@@ -22,12 +22,9 @@ const TableComponent: React.FC<TableProps> = ({
   columns,
   data,
   action,
-  setData,
+  renderActions
 }) => {
-  const handleDelete =( id: string)=>{
-    setData(prevData => prevData.filter(user => user.id !== id));
 
-  }
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">{title}</h2>
@@ -49,14 +46,15 @@ const TableComponent: React.FC<TableProps> = ({
               <TableCell>{user.username}</TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>
-                {action && (
+                {/* {action && (
                   <button className="flex justify-center" onClick={()=>handleDelete(user.id!)}>
                     <Icon
                       icon="material-symbols:delete"
                       className="cursor-pointer hover:text-red-800"
                     />
                   </button>
-                )}
+                )} */}
+                {action && renderActions && renderActions(user)}
               </TableCell>
             </TableRow>
           ))}
