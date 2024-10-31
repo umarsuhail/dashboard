@@ -7,7 +7,7 @@ import { createUser } from "../redux/userActions";
 import { AppDispatch, RootState } from "../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { setUsers, setError } from "../redux/slices/userSlices";
+import { setUsers, setError, deleteUser } from "../redux/slices/userSlices";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default function Users() {
@@ -29,7 +29,8 @@ export default function Users() {
   }
   useEffect(() => {
     getUsers("https://jsonplaceholder.typicode.com/users");
-  });
+  },[]);
+
   const renderActions = (user: User) => {
     return (
       <div className="flex justify-center space-x-2">
@@ -63,6 +64,7 @@ export default function Users() {
         throw new Error("Failed to delete user");
       }
       dispatch(setUsers(users.filter(user => user.id !== id)));
+      dispatch(deleteUser(id));
     } catch (error) {
       console.error(error);
       dispatch(setError("Failed to delete user"));
@@ -105,15 +107,15 @@ export default function Users() {
       >
         Create Users
       </button>
-
-      <TableComponent
+      {users?.length?  <TableComponent
         title="Table Component"
         columns={columns}
         data={users}
         action={true}
         setData={() => {}}
         renderActions={renderActions}
-      />
+      />:<span className="m-3 text-sm text-gray-500"> No users found</span>}
+    
       <button
         className="bg-primary rounded-md p-2 m-2 text-secondary_bg float-right text-sm"
         onClick={manageUsers}
