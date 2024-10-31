@@ -36,7 +36,6 @@ const userSlice = createSlice({
       },
     },
   });
-  console.log(initialState,'initialState');
   
   export const { addUser,setUsers, setLoading, setError,deleteUser } = userSlice.actions;
 
