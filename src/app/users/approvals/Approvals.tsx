@@ -8,7 +8,7 @@ import { User } from '@/app/utils/types';
 
 export default function Approvals() {
   const dispatch = useDispatch<AppDispatch>();
-  const columns = ["Name", "Status","role", "Action"];
+  const columns = ["Name", "Status","User Name", "Approve"];
 
   const users = useSelector((state: RootState) => state.users.users);
   const deletedUsers = useSelector((state: RootState) => state.users.deletedUsers);

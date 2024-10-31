@@ -80,7 +80,7 @@ export default function Users() {
   };
 
 
-  const columns = ["Name", "Role", "Status", "Action"];
+  const columns = ["Name", "User name", "Status", "Action"];
 
   const addNewUser = () => {
     showPopup(true);
