@@ -17,7 +17,7 @@ export default function Approvals() {
     return (
       <div className="flex justify-center space-x-2">
         <button
-          className="cursor-pointer hover:text-red-800"
+          className="cursor-pointer hover:text-primary"
           onClick={() => approve()}
         >
           <Icon icon="material-symbols:approval-delegation-outline-rounded" />

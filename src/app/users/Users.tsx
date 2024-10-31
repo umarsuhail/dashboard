@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import TableComponent from "../components/Table";
 import Popup from "../components/Popup";
 import { User } from "../utils/types";
@@ -17,19 +17,20 @@ export default function Users() {
   const users = useSelector((state: RootState) => state.users.users);
   const router = useRouter();
 
-  async function getUsers(url: string) {
+  const getUsers = useCallback(async (url: string) => {
     try {
       const res = await fetch(url);
       const data = await res.json();
       dispatch(setUsers(data));
     } catch (error) {
-      console.log(error);
+      console.error(error);
       dispatch(setError("Failed to fetch users"));
     }
-  }
+  }, [dispatch]);
+
   useEffect(() => {
     getUsers("https://jsonplaceholder.typicode.com/users");
-  },[]);
+  }, [getUsers]);
 
   const renderActions = (user: User) => {
     return (
